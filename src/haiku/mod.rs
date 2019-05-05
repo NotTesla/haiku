@@ -1,5 +1,7 @@
 extern crate regex;
 
+use std::string::String;
+
 pub fn count_syllables(word: &str) -> usize {
     use self::regex::Regex;
 
@@ -26,4 +28,22 @@ pub fn count_syllables(word: &str) -> usize {
     }
     
     syllable_counter
+}
+
+pub fn get_haiku(line: &String) -> Option<String> {
+    let iter = line.split(not_word_char);
+
+    for word in iter {
+        if word.is_empty() {
+            continue;
+        }
+        count_syllables(word);
+        // scan_for_syllables(word);
+    }
+
+    None
+}
+
+fn not_word_char(c: char) -> bool {
+    !c.is_alphabetic() && c != '\''
 }
